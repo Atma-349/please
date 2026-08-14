@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will you go out with me?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<span class="deco" style="top:8%; left:6%; font-size:26px; animation-delay:0s;">🌷</span>
+<span class="deco" style="top:16%; right:8%; font-size:30px; animation-delay:1s;">⭐</span>
+<span class="deco" style="top:36%; left:4%; font-size:22px; animation-delay:2s;">💮</span>
+<span class="deco" style="top:62%; right:5%; font-size:24px; animation-delay:.5s;">🌼</span>
+<span class="deco" style="top:12%; left:46%; font-size:20px; animation-delay:1.5s;">🩷</span>
+<span class="deco" style="bottom:10%; left:14%; font-size:22px; animation-delay:2.5s;">🍓</span>
+
+<div class="card" id="card">
+
+  <!-- ===== FOTO (polaroid) =====
+       Cara ganti foto:
+       1. Taruh file fotomu di folder yang sama dengan index.html
+       2. Ganti nilai --photo-url di bagian SETTINGS pada style.css
+  -->
+  <div class="polaroid">
+    <img class="polaroid-photo" src="my-photo.jpg" alt="foto kita" onerror="this.style.display='none'">
+    <div class="polaroid-caption">me &amp; you ♥</div>
+  </div>
+
+  <!-- Pertanyaan Utama -->
+  <h1 id="question">Will you go<br>out with me?</h1>
+
+  <div class="btn-row" id="btnRow">
+    <button id="yes"></button>
+    <button id="no"></button>
+    <span id="heartBroken">💔 heart broken</span>
+  </div>
+
+  <div id="teasing"></div>
+
+  <!-- Tahap 2: Layar Win -->
+  <div class="win-screen" id="winScreen">
+    <div class="big-heart">💗</div>
+    <h2 id="winMsg">Yay!! I knew<br>you'd say yes~</h2>
+    <button id="toDateBtn" class="pixel-btn">PRESS TO CONTINUE ▶</button>
+  </div>
+
+  <!-- Tahap 3: Layar Pilih Tanggal -->
+  <div class="date-screen" id="dateScreen">
+    <h3 id="dateMsg">Pilih tanggal<br>jalan kita yuk! 🗓️</h3>
+    <input type="date" id="dateInput" class="date-picker">
+    <button id="finalContinueBtn" class="pixel-btn" disabled>CONTINUE ▶</button>
+  </div>
+
+  <!-- Tahap 4: Layar Akhir -->
+  <div class="final-screen" id="finalScreen">
+    <div class="big-heart">💞</div>
+    <h3 id="finalMsg"></h3>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

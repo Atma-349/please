@@ -1,0 +1,290 @@
+/* =====================================================
+   ★★★  KONFIGURASI / SETTINGS  ★★★
+   Ganti bagian ini aja buat ubah foto & latar belakang.
+   ===================================================== */
+:root{
+  /* --- LATAR BELAKANG ---
+     Pilih salah satu:
+     - Nama warna:   pink, #ffcce0, dst.
+     - Gradient:     linear-gradient(...)
+     - Foto:         url('namafile.jpg') — taruh file foto di folder yang sama, atau pakai link
+     Contoh pakai foto:
+     --bg-image: url('background.jpg');
+     Cukup ganti nilai di bawah ini:  */
+  --bg-image: linear-gradient(180deg, #fff0f6 0%, #ffd9ea 55%, #ffb8d6 100%);
+
+  /* --- WARNA UTAMA --- */
+  --pink-deep:#e0407a;
+  --pink-main:#f472a6;
+  --pink-light:#ffb8d6;
+  --pink-pale:#ffe4f0;
+  --white:#fff7fb;
+  --outline:#8a2450;
+
+  /* --- FOTO KAMU (ganti "my-photo.jpg" dengan nama file fotomu) --- */
+  --photo-url: url('my-photo.jpg');
+
+  /* Kalau file fotonya belum ada, isi otomatis pakai gambar placeholder di bawah ini.
+     Set ke none:  --photo-fallback: none;  kalau sudah punya fotonya */
+  --photo-fallback: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23ffcce3"/><circle cx="100" cy="78" r="34" fill="%23e0407a"/><path d="M70 150 q10 -26 30 -26 t30 26 z" fill="%23e0407a"/><circle cx="88" cy="78" r="4" fill="%23fff"/><circle cx="112" cy="78" r="4" fill="%23fff"/></svg>');
+
+  /* --- TULISAN DI TOMBOL --- */
+  --yes-text:"YES";
+  --no-text:"No";
+}
+
+*{box-sizing:border-box;}
+
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  overflow:hidden;
+  font-family:'Baloo 2', cursive;
+}
+
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(var(--pink-main) 3px, transparent 3px),
+    radial-gradient(var(--pink-main) 3px, transparent 3px),
+    var(--bg-image);
+  background-size:32px 32px, 32px 32px, cover;
+  background-position:0 0, 16px 16px, center;
+  position:relative;
+}
+
+/* ===== deco floating ===== */
+.deco{
+  position:absolute;
+  pointer-events:none;
+  user-select:none;
+  animation:float 6s ease-in-out infinite;
+  filter:drop-shadow(0 3px 3px rgba(138,36,80,.2));
+  z-index:1;
+}
+@keyframes float{
+  0%,100%{ transform:translateY(0) rotate(0deg); }
+  50%{ transform:translateY(-14px) rotate(8deg); }
+}
+
+/* ===== bingkai polaroid foto ===== */
+.polaroid{
+  position:relative;
+  width:min(78vw, 200px);
+  margin:0 auto 28px;
+  padding:12px 12px 34px;
+  background:var(--white);
+  border-radius:14px;
+  border:4px solid var(--pink-deep);
+  outline:3px dashed var(--pink-light);
+  box-shadow:0 8px 0 rgba(138,36,80,.3);
+  transform:rotate(-3deg);
+  transition:transform .3s ease;
+}
+.polaroid:hover{ transform:rotate(0deg) scale(1.03); }
+
+.polaroid-photo{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:8px;
+  background-image:var(--photo-fallback, var(--photo-url));
+  background-size:cover;
+  background-position:center;
+  display:block;
+}
+
+.polaroid-caption{
+  position:absolute;
+  bottom:8px;
+  left:0; right:0;
+  text-align:center;
+  color:var(--pink-deep);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+/* ===== kartu utama ===== */
+.card{
+  position:relative;
+  z-index:2;
+  width:min(92vw, 480px);
+  padding:38px 26px 30px;
+  text-align:center;
+  background:rgba(255,255,255,.55);
+  border:4px solid var(--white);
+  outline:3px dashed var(--pink-main);
+  border-radius:28px;
+  box-shadow:0 10px 0 rgba(138,36,80,.25);
+}
+
+h1{
+  color:var(--pink-deep);
+  font-size:clamp(24px, 6vw, 34px);
+  line-height:1.5;
+  margin:0 0 26px;
+  letter-spacing:1px;
+  text-shadow:2px 2px 0 var(--white);
+}
+
+.btn-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  min-height:150px;
+  position:relative;
+  flex-wrap:wrap;
+}
+
+button{
+  font-family:'Baloo 2', cursive;
+  font-weight:800;
+  border-radius:40px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:transform .18s ease, font-size .18s ease, background .18s ease, opacity .18s ease;
+  position:relative;
+  letter-spacing:1px;
+}
+
+#yes{
+  background:linear-gradient(180deg, #ff85b3 0%, var(--pink-deep) 100%);
+  color:#fff;
+  border:3px solid var(--white);
+  outline:2px solid var(--outline);
+  padding:16px 32px;
+  font-size:16px;
+  box-shadow:0 6px 0 var(--outline);
+  z-index:5;
+}
+#yes::before{ content:var(--yes-text); }
+#yes::after{ content:' ♥'; }
+#yes:active{ transform:translateY(3px) scale(var(--current-scale, 1)); box-shadow:0 2px 0 var(--outline); }
+
+#no{
+  position:relative;
+  background:var(--white);
+  color:var(--pink-deep);
+  border:3px solid var(--pink-deep);
+  outline:2px solid var(--outline);
+  padding:14px 26px;
+  font-size:15px;
+  box-shadow:0 5px 0 var(--outline);
+  z-index:4;
+}
+#no::before{ content:var(--no-text); }
+#no:hover{ background:var(--pink-pale); }
+
+#heartBroken{
+  position:absolute;
+  font-size:12px;
+  color:var(--white);
+  background:var(--outline);
+  border:2px solid var(--white);
+  border-radius:14px;
+  padding:6px 12px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  z-index:6;
+  transition:opacity .2s ease;
+}
+#heartBroken.show{ opacity:1; }
+
+#teasing{
+  margin-top:20px;
+  color:var(--outline);
+  font-size:13px;
+  line-height:1.7;
+  min-height:22px;
+  opacity:0;
+  transition:opacity 0.2s ease;
+}
+#teasing.show{ opacity:1; }
+#teasing.hidden{ display:none; }
+
+/* ===== tombol umum ===== */
+.pixel-btn{
+  background:var(--white);
+  color:var(--pink-deep);
+  border:3px solid var(--pink-deep);
+  outline:2px solid var(--outline);
+  padding:14px 24px;
+  font-size:13px;
+  box-shadow:0 5px 0 var(--outline);
+}
+.pixel-btn:active:not(:disabled){ transform:translateY(3px); box-shadow:0 2px 0 var(--outline); }
+.pixel-btn:disabled{
+  background:#e8d5de;
+  color:#b396a5;
+  border-color:#b396a5;
+  outline-color:#9a7d8c;
+  box-shadow:0 5px 0 #9a7d8c;
+  cursor:not-allowed;
+  opacity:.7;
+}
+
+/* ===== layar-layar tahapan ===== */
+.win-screen, .date-screen, .final-screen{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  animation:pop .4s ease;
+}
+.win-screen.show, .date-screen.show, .final-screen.show{ display:flex; }
+
+.win-screen h2, .date-screen h3, .final-screen h3{
+  color:var(--pink-deep);
+  line-height:1.7;
+  margin:0;
+  text-shadow:2px 2px 0 var(--white);
+}
+.win-screen h2{ font-size:clamp(20px,5.5vw,28px); }
+.date-screen h3, .final-screen h3{ font-size:clamp(15px,4.5vw,19px); }
+
+.big-heart{
+  font-size:56px;
+  animation:beat 1s ease-in-out infinite;
+}
+@keyframes beat{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.18); }
+}
+
+/* ===== input tanggal ===== */
+.date-picker{
+  font-family:'Baloo 2', cursive;
+  font-size:15px;
+  font-weight:700;
+  padding:12px;
+  border:3px solid var(--pink-deep);
+  outline:2px solid var(--outline);
+  border-radius:14px;
+  background:var(--white);
+  color:var(--outline);
+  text-align:center;
+  box-shadow:0 5px 0 var(--outline);
+  cursor:pointer;
+}
+
+/* ===== kontrol tampilan antar tahap ===== */
+.card.step-win .btn-row, .card.step-win h1{ display:none; }
+.card.step-date .win-screen{ display:none; }
+.card.step-final .date-screen{ display:none; }
+
+@keyframes pop{
+  0%{ transform:scale(.6); opacity:0; }
+  70%{ transform:scale(1.08); }
+  100%{ transform:scale(1); opacity:1; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .deco, .big-heart, .win-screen{ animation:none !important; }
+  button{ transition:none !important; }
+}
